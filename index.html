@@ -302,3 +302,307 @@
       border-radius: 50%;
       font-size: 1.5rem;
       text-align:
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Fahrzeugüberführung bundesweit</title>
+  <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/747/747376.png" type="image/png" />
+  
+  <!-- AOS Animation CSS -->
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+
+  <style>
+    /* Grundstyles */
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #f9fafb;
+      color: #111827;
+    }
+    header {
+      background-color: #1f2937;
+      color: white;
+      padding: 2rem 1rem;
+      text-align: center;
+      position: relative;
+      z-index: 1001;
+    }
+    nav {
+      background-color: #111827;
+      padding: 1rem;
+      position: relative;
+      z-index: 1001;
+    }
+    nav ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      gap: 2rem;
+      justify-content: center;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+    nav ul li {
+      list-style: none;
+    }
+    nav ul li a {
+      color: white;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 1.1rem;
+    }
+
+    /* Hamburger Menü für mobil */
+    .menu-toggle {
+      display: none;
+      flex-direction: column;
+      cursor: pointer;
+      position: absolute;
+      right: 1rem;
+      top: 1.5rem;
+      z-index: 1100;
+    }
+    .menu-toggle div {
+      width: 25px;
+      height: 3px;
+      background-color: white;
+      margin: 5px 0;
+      transition: 0.4s;
+    }
+    nav.open ul {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1rem;
+      padding: 0;
+    }
+    @media (max-width: 768px) {
+      nav ul {
+        display: none;
+        flex-direction: column;
+      }
+      .menu-toggle {
+        display: flex;
+      }
+    }
+
+    /* Hero Bereich mit Fahrzeug-Hintergrund */
+    .hero {
+      position: relative;
+      height: 75vh;
+      background: url('https://images.unsplash.com/photo-1502877338535-766e1452684a?auto=format&fit=crop&w=1600&q=90') no-repeat center center fixed;
+      background-size: 100%;
+      color: white;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      overflow: hidden;
+      animation: zoomIn 20s ease-in-out infinite alternate;
+      padding: 0 1rem;
+    }
+    .hero::before {
+      content: "";
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(0, 0, 0, 0.3);
+      z-index: 0;
+    }
+    .hero h1,
+    .hero p {
+      position: relative;
+      z-index: 1;
+      text-shadow: 2px 2px 8px rgba(0,0,0,0.7);
+      margin: 0 auto;
+      max-width: 900px;
+    }
+    @keyframes zoomIn {
+      0% {
+        background-size: 100%;
+      }
+      100% {
+        background-size: 110%;
+      }
+    }
+
+    /* Inhaltliche Sektionen */
+    section {
+      max-width: 1000px;
+      margin: 2rem auto;
+      padding: 1rem;
+    }
+    section h2 {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+      text-align: center;
+    }
+    ul {
+      list-style: disc;
+      padding-left: 1.5rem;
+    }
+    p.center {
+      text-align: center;
+    }
+
+    /* Kundenbewertungen */
+    .testimonials {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+      max-width: 700px;
+      margin: 0 auto;
+    }
+    .testimonial {
+      background-color: #f3f4f6;
+      padding: 1rem 1.5rem;
+      border-radius: 0.5rem;
+      box-shadow: 0 2px 5px rgb(0 0 0 / 0.1);
+      font-style: italic;
+      position: relative;
+    }
+    .testimonial::before {
+      content: "“";
+      font-size: 3rem;
+      color: #10b981;
+      position: absolute;
+      top: 5px;
+      left: 10px;
+      font-weight: bold;
+      font-family: serif;
+    }
+    .testimonial p {
+      margin: 0;
+      padding-left: 30px;
+    }
+    .testimonial cite {
+      display: block;
+      margin-top: 0.5rem;
+      font-style: normal;
+      font-weight: 600;
+      text-align: right;
+      color: #4b5563;
+    }
+
+    /* Preise Tabelle */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1rem 0;
+      font-size: 1rem;
+    }
+    th, td {
+      border: 1px solid #d1d5db;
+      padding: 0.75rem 1rem;
+      text-align: center;
+    }
+    th {
+      background-color: #10b981;
+      color: white;
+    }
+    tbody tr:nth-child(even) {
+      background-color: #f3f4f6;
+    }
+
+    /* FAQs */
+    .faq {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    .faq details {
+      margin-bottom: 1rem;
+      border: 1px solid #d1d5db;
+      border-radius: 0.375rem;
+      padding: 1rem;
+      background: white;
+      cursor: pointer;
+      box-shadow: 0 1px 3px rgb(0 0 0 / 0.1);
+      transition: background-color 0.3s ease;
+    }
+    .faq details[open] {
+      background-color: #d1fae5;
+      border-color: #10b981;
+    }
+    .faq summary {
+      font-weight: 600;
+      font-size: 1.1rem;
+      outline: none;
+    }
+
+    /* Sicherheits & Versicherungsinfo */
+    .security {
+      display: flex;
+      align-items: center;
+      max-width: 800px;
+      margin: 2rem auto;
+      gap: 1rem;
+      background: #d1fae5;
+      padding: 1rem 1.5rem;
+      border-radius: 0.5rem;
+      box-shadow: 0 2px 6px rgb(0 0 0 / 0.1);
+    }
+    .security img {
+      width: 50px;
+      height: 50px;
+      filter: drop-shadow(1px 1px 1px rgba(0,0,0,0.2));
+    }
+    .security p {
+      margin: 0;
+      font-weight: 600;
+      color: #065f46;
+      font-size: 1.1rem;
+    }
+
+    /* Google Maps */
+    .map-container {
+      max-width: 1000px;
+      margin: 2rem auto;
+      box-shadow: 0 2px 10px rgb(0 0 0 / 0.15);
+      border-radius: 10px;
+      overflow: hidden;
+      height: 400px;
+    }
+    .map-container iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+
+    /* Kontaktformular */
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+    input, textarea, button {
+      padding: 0.75rem;
+      font-size: 1rem;
+      border: 1px solid #d1d5db;
+      border-radius: 0.375rem;
+      font-family: inherit;
+    }
+    button {
+      background-color: #1f2937;
+      color: white;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+    button:hover {
+      background-color: #111827;
+    }
+
+    /* Call-Back Button */
+    .callback-button {
+      position: fixed;
+      bottom: 90px;
+      right: 20px;
+      background-color: #10b981;
+      color: white;
+      padding: 1rem;
+      border-radius: 50%;
+      font-size: 1.5rem;
+      text-align:
