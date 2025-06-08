@@ -1,330 +1,388 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Fahrzeugüberführung bundesweit | Schnell & Sicher</title>
-<link rel="icon" href="https://cdn-icons-png.flaticon.com/512/747/747376.png" />
-<style>
-  /* Reset & Basis */
-  *, *::before, *::after {
-    box-sizing: border-box;
-  }
-  body {
-    margin: 0; 
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background: #ffffff;
-    color: #111111;
-    scroll-behavior: smooth;
-  }
-  a {
-    color: inherit;
-    text-decoration: none;
-  }
-
-  /* Navigation */
-  nav {
-    background: #059669;
-    display: flex;
-    justify-content: center;
-    gap: 2rem;
-    padding: 1rem 0;
-    position: sticky;
-    top: 0;
-    z-index: 999;
-    font-weight: 600;
-  }
-  nav a {
-    color: white;
-    padding: 0.5rem 1rem;
-    border-radius: 6px;
-    transition: background-color 0.3s ease;
-  }
-  nav a:hover,
-  nav a.active {
-    background: #10b981;
-  }
-
-  /* Header */
-  header {
-    background: linear-gradient(135deg, #10b981 0%, #059669 100%);
-    color: white;
-    padding: 5rem 1rem 6rem;
-    text-align: center;
-  }
-  header h1 {
-    font-size: 3rem;
-    margin-bottom: 0.5rem;
-    font-weight: 700;
-  }
-  header p {
-    font-size: 1.4rem;
-    margin-bottom: 2rem;
-    font-weight: 500;
-    max-width: 600px;
-    margin-left: auto;
-    margin-right: auto;
-  }
-  header .btn-primary {
-    background-color: white;
-    color: #059669;
-    font-weight: 700;
-    padding: 1rem 3rem;
-    font-size: 1.125rem;
-    border-radius: 9999px;
-    cursor: pointer;
-    border: none;
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
-    transition: background-color 0.3s ease;
-  }
-  header .btn-primary:hover {
-    background-color: #10b981;
-    color: white;
-  }
-
-  /* Sections */
-  section {
-    max-width: 960px;
-    margin: 4rem auto;
-    padding: 0 1rem;
-  }
-  section h2 {
-    font-weight: 700;
-    font-size: 2rem;
-    color: #059669;
-    margin-bottom: 2rem;
-    border-bottom: 4px solid #10b981;
-    display: inline-block;
-    padding-bottom: 0.25rem;
-  }
-
-  /* Grid Features */
-  .features-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit,minmax(240px,1fr));
-    gap: 1.8rem;
-  }
-  .feature {
-    background: #f9fafb;
-    border-radius: 12px;
-    padding: 1.8rem 1.5rem;
-    box-shadow: 0 6px 16px rgb(0 0 0 / 0.06);
-    text-align: center;
-    transition: box-shadow 0.3s ease;
-  }
-  .feature:hover {
-    box-shadow: 0 10px 30px rgb(0 0 0 / 0.1);
-  }
-  .feature-icon {
-    font-size: 3rem;
-    color: #10b981;
-    margin-bottom: 1rem;
-  }
-  .feature h3 {
-    font-weight: 700;
-    margin-bottom: 0.6rem;
-    color: #047857;
-    font-size: 1.3rem;
-  }
-  .feature p {
-    font-size: 1rem;
-    color: #4b5563;
-    line-height: 1.5;
-  }
-
-  /* Kontaktformular */
-  form {
-    background: #f9fafb;
-    padding: 2rem 2.5rem;
-    border-radius: 12px;
-    box-shadow: 0 8px 24px rgba(0,0,0,0.08);
-    max-width: 600px;
-    margin: 0 auto 4rem;
-  }
-  form label {
-    display: block;
-    margin-bottom: 0.3rem;
-    font-weight: 600;
-    color: #047857;
-  }
-  form input,
-  form textarea {
-    width: 100%;
-    padding: 0.8rem 1rem;
-    font-size: 1rem;
-    border-radius: 8px;
-    border: 2px solid #d1d5db;
-    margin-bottom: 1.25rem;
-    transition: border-color 0.3s ease;
-  }
-  form input:focus,
-  form textarea:focus {
-    border-color: #059669;
-    outline: none;
-  }
-  form button {
-    background-color: #059669;
-    color: white;
-    font-weight: 700;
-    font-size: 1.125rem;
-    padding: 1rem 3rem;
-    border: none;
-    border-radius: 9999px;
-    cursor: pointer;
-    box-shadow: 0 6px 12px rgba(0,0,0,0.15);
-    transition: background-color 0.3s ease;
-  }
-  form button:hover {
-    background-color: #10b981;
-  }
-
-  /* Footer */
-  footer {
-    text-align: center;
-    padding: 2rem 1rem;
-    background: #f3f4f6;
-    color: #6b7280;
-    font-size: 0.9rem;
-  }
-  footer a {
-    color: #059669;
-    font-weight: 600;
-  }
-  footer a:hover {
-    text-decoration: underline;
-  }
-
-  /* WhatsApp Button */
-  .whatsapp-button {
-    position: fixed;
-    bottom: 90px;
-    right: 20px;
-    background-color: #25D366;
-    color: white;
-    padding: 1rem 1.2rem;
-    border-radius: 9999px;
-    font-size: 1.8rem;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.15);
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    gap: 0.6rem;
-    z-index: 1000;
-    text-decoration: none;
-    transition: background-color 0.3s ease;
-  }
-  .whatsapp-button:hover {
-    background-color: #1DA851;
-  }
-
-  /* Responsive */
-  @media (max-width: 640px) {
-    header h1 {
-      font-size: 2rem;
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Fahrzeugüberführung bundesweit</title>
+  <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/747/747376.png" type="image/png" />
+  <style>
+    /* Grund-Reset & Schrift */
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #f9fafb;
+      color: #111827;
+      scroll-behavior: smooth;
     }
-    header p {
-      font-size: 1rem;
+    header {
+      background-color: #1f2937;
+      color: white;
+      padding: 2rem 1rem;
+      text-align: center;
     }
     nav {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      background-color: #111827;
+      padding: 1rem;
       flex-wrap: wrap;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    nav a {
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+      cursor: pointer;
+      transition: color 0.3s ease;
+    }
+    nav a:hover {
+      color: #10b981;
+      text-decoration: underline;
+    }
+    /* Hintergrund-Slider */
+    .hero {
+      position: relative;
+      height: 400px;
+      overflow: hidden;
+      color: white;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 0 1rem;
+      user-select: none;
+      background-color: #111827;
+    }
+    .slide {
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background-position: center;
+      background-size: cover;
+      opacity: 0;
+      transition: opacity 1s ease-in-out;
+      z-index: 0;
+    }
+    .slide.active {
+      opacity: 1;
+      z-index: 1;
+    }
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 900px;
+      background: rgba(0,0,0,0.5);
+      padding: 2rem;
+      border-radius: 8px;
+      animation: slideInDown 1s ease forwards;
+      opacity: 0;
+    }
+    @keyframes slideInDown {
+      from {
+        transform: translateY(-30px);
+        opacity: 0;
+      }
+      to {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+    .hero-content h1 {
+      font-size: 3rem;
+      margin: 0 0 0.5rem;
+    }
+    .hero-content p {
+      font-size: 1.25rem;
+      margin: 0;
+    }
+    /* Sektionen mit Fade-in */
+    section {
+      max-width: 900px;
+      margin: 3rem auto;
+      padding: 1rem 2rem;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+      background-color: white;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgb(0 0 0 / 0.1);
+    }
+    section.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    section:nth-of-type(odd).visible {
+      transition-delay: 0.15s;
+    }
+    section:nth-of-type(even).visible {
+      transition-delay: 0.3s;
+    }
+    section h2 {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+      color: #1f2937;
+      border-bottom: 2px solid #10b981;
+      padding-bottom: 0.5rem;
+    }
+    ul {
+      list-style: disc inside;
+      color: #374151;
+    }
+    form {
+      display: flex;
+      flex-direction: column;
       gap: 1rem;
     }
-  }
-</style>
+    input, textarea, select, button {
+      padding: 0.75rem;
+      font-size: 1rem;
+      border: 1px solid #d1d5db;
+      border-radius: 0.375rem;
+      transition: border-color 0.3s ease;
+    }
+    input:focus, textarea:focus, select:focus {
+      outline: none;
+      border-color: #10b981;
+      box-shadow: 0 0 5px rgba(16, 185, 129, 0.5);
+    }
+    button {
+      background-color: #10b981;
+      color: white;
+      border: none;
+      cursor: pointer;
+      font-weight: bold;
+      transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+      border-radius: 0.5rem;
+    }
+    button:hover {
+      background-color: #059669;
+      transform: scale(1.05);
+      box-shadow: 0 4px 15px rgba(5, 150, 105, 0.6);
+    }
+    /* Preisrechner Ergebnis */
+    #preisErgebnis {
+      font-weight: bold;
+      margin-top: 0.5rem;
+      color: #059669;
+    }
+    /* Callback Button */
+    .callback-button {
+      position: fixed;
+      bottom: 90px;
+      right: 20px;
+      background-color: #10b981;
+      color: white;
+      padding: 1rem;
+      border-radius: 50%;
+      font-size: 1.5rem;
+      text-align: center;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+      cursor: pointer;
+      z-index: 1000;
+      animation: pulse 2.5s infinite;
+      user-select: none;
+    }
+    @keyframes pulse {
+      0%, 100% {
+        box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7);
+      }
+      50% {
+        box-shadow: 0 0 15px 10px rgba(16, 185, 129, 0);
+      }
+    }
+    /* Footer */
+    footer {
+      background-color: #f3f4f6;
+      text-align: center;
+      padding: 2rem 1rem;
+      font-size: 0.9rem;
+      color: #6b7280;
+    }
+    footer a {
+      color: #2563eb;
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+    footer a:hover {
+      text-decoration: underline;
+      color: #1d4ed8;
+    }
+    /* Cookie Banner */
+    .cookie-banner {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      background: #1f2937;
+      color: white;
+      padding: 1rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 9999;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+    .cookie-banner button {
+      background: white;
+      color: #1f2937;
+      border: none;
+      padding: 0.5rem 1rem;
+      cursor: pointer;
+      border-radius: 4px;
+      font-weight: bold;
+    }
+    /* Responsive */
+    @media (max-width: 600px) {
+      nav {
+        flex-direction: column;
+        align-items: center;
+      }
+      .hero-content h1 {
+        font-size: 2rem;
+      }
+      .hero-content p {
+        font-size: 1rem;
+      }
+    }
+  </style>
 </head>
 <body>
 
-<nav>
-  <a href="#leistungen" class="active">Leistungen</a>
-  <a href="#vorteile">Vorteile</a>
-  <a href="#kontakt">Kontakt</a>
-</nav>
+  <header>
+    <h1>Fahrzeugüberführung bundesweit</h1>
+    <p>Professionell. Schnell. Sicher. Fairer Preis.</p>
+  </header>
 
-<header>
-  <h1>Fahrzeugüberführung bundesweit</h1>
-  <p>Sicher, schnell und zuverlässig – wir bringen Ihr Fahrzeug sicher ans Ziel, deutschlandweit und zum fairen Preis.</p>
-  <button class="btn-primary" onclick="document.getElementById('kontakt').scrollIntoView({behavior:'smooth'})">Jetzt Kontakt aufnehmen</button>
-</header>
+  <nav>
+    <a href="#leistungen">Leistungen</a>
+    <a href="#kunden">Zielgruppen</a>
+    <a href="#preisrechner">Preisrechner</a>
+    <a href="#kontakt">Kontakt</a>
+    <a href="#antrag">Antrag</a>
+  </nav>
 
-<section id="leistungen">
-  <h2>Unsere Leistungen</h2>
-  <div class="features-grid">
-    <div class="feature">
-      <div class="feature-icon">🚗</div>
-      <h3>Fahrzeugüberführung</h3>
-      <p>Professioneller Transport von PKW, Transportern & Motorrädern.</p>
-    </div>
-    <div class="feature">
-      <div class="feature-icon">🏠</div>
-      <h3>Hol- & Bringservice</h3>
-      <p>Wir holen Ihr Fahrzeug ab und bringen es direkt an den gewünschten Ort.</p>
-    </div>
-    <div class="feature">
-      <div class="feature-icon">🛡️</div>
-      <h3>Vollkaskoversicherung</h3>
-      <p>Maximaler Schutz durch umfassende Versicherung während des Transports.</p>
-    </div>
-    <div class="feature">
-      <div class="feature-icon">🛠️</div>
-      <h3>Zusatzservices</h3>
-      <p>Tank-, Reinigungs- und Zulassungsservice – alles aus einer Hand.</p>
+  <div class="hero">
+    <div class="slide active" style="background-image: url('https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=1600&q=80');"></div>
+    <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1511914265871-d7bf63e44ff2?auto=format&fit=crop&w=1600&q=80');"></div>
+    <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1483729558449-99ef09a8c325?auto=format&fit=crop&w=1600&q=80');"></div>
+
+    <div class="hero-content">
+      <h1>Fahrzeugüberführung bundesweit</h1>
+      <p>Wir bringen Ihr Auto sicher und pünktlich ans Ziel.</p>
     </div>
   </div>
-</section>
 
-<section id="vorteile">
-  <h2>Ihre Vorteile</h2>
-  <div class="features-grid">
-    <div class="feature">
-      <div class="feature-icon">⏱️</div>
-      <h3>Schnell & Zuverlässig</h3>
-      <p>Termintreue und sorgfältiger Umgang mit Ihrem Fahrzeug garantiert.</p>
-    </div>
-    <div class="feature">
-      <div class="feature-icon">💰</div>
-      <h3>Faire Preise</h3>
-      <p>Transparent, ohne versteckte Kosten – immer passend zu Ihrem Budget.</p>
-    </div>
-    <div class="feature">
-      <div class="feature-icon">📞</div>
-      <h3>Persönlicher Service</h3>
-      <p>Direkter Ansprechpartner für alle Fragen rund um Ihre Überführung.</p>
-    </div>
-    <div class="feature">
-      <div class="feature-icon">✅</div>
-      <h3>Professionell</h3>
-      <p>Erfahrene Fahrer mit höchster Sorgfalt für Ihr Fahrzeug.</p>
-    </div>
-  </div>
-</section>
+  <section id="leistungen">
+    <h2>Unsere Leistungen</h2>
+    <ul>
+      <li>Überführung von Fahrzeugen aller Art</li>
+      <li>Schlüsselübergabe inklusive</li>
+      <li>Versicherung während des Transports</li>
+      <li>Flexible Terminvereinbarung</li>
+    </ul>
+  </section>
 
-<section id="kontakt">
-  <h2>Kontaktformular</h2>
-  <form>
-    <label for="name">Name *</label>
-    <input id="name" type="text" placeholder="Ihr Name" required />
-    
-    <label for="email">E-Mail *</label>
-    <input id="email" type="email" placeholder="Ihre E-Mail" required />
-    
-    <label for="telefon">Telefonnummer</label>
-    <input id="telefon" type="tel" placeholder="Ihre Telefonnummer" />
-    
-    <label for="nachricht">Nachricht</label>
-    <textarea id="nachricht" rows="4" placeholder="Ihre Nachricht"></textarea>
-    
-    <button type="submit">Anfrage senden</button>
-  </form>
-</section>
+  <section id="kunden">
+    <h2>Für wen wir arbeiten</h2>
+    <ul>
+      <li>Privatkunden</li>
+      <li>Autohändler</li>
+      <li>Werkstätten</li>
+      <li>Fahrzeugbörsen</li>
+    </ul>
+  </section>
 
-<a href="https://wa.me/491728001926" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp Kontakt" class="whatsapp-button">
-  <svg style="width:24px;height:24px;fill:white;" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M20.52 3.48A11.82 11.82 0 0012 0C5.37 0 .01 5.37.01 12a11.83 11.83 0 001.61 6.15L0 24l5.9-1.56a11.92 11.92 0 006.1 1.56h.01c6.63 0 12-5.37 12-12 0-3.2-1.25-6.21-3.49-8.42zm-8.49 17.06h-.01a9.41 9.41 0 01-4.8-1.34l-.34-.2-3.5.92.93-3.41-.22-.35a9.41 9.41 0 011.34-4.82 9.28 9.28 0 017.95-4.63c2.5 0 4.84.97 6.6 2.73a9.26 9.26 0 012.75 6.59 9.4 9.4 0 01-9.42 9.42zm5.14-6.3c-.28-.14-1.66-.82-1.92-.91-.26-.1-.45-.14-.64.14-.2.27-.78.9-.95 1.08-.17.18-.34.2-.62.07a8.02 8.02 0 01-2.36-1.46 8.73 8.73 0 01-1.62-2.02c-.17-.3 0-.46.12-.6.12-.12.28-.3.42-.45a1.2 1.2 0 00.2-.35.34.34 0 00-.02-.33c-.06-.14-.56-1.35-.77-1.86-.2-.5-.4-.43-.64-.43-.17 0-.37 0-.57 0-.2 0-.53.07-.81.39-.27.33-1.04 1.02-1.04 2.48 0 1.46 1.07 2.87 1.22 3.07.14.2 2.1 3.22 5.08 4.52.71.3 1.26.48 1.69.62.71.23 1.36.2 1.87.12.57-.09 1.66-.68 1.9-1.33.25-.65.25-1.2.18-1.33-.07-.13-.26-.2-.54-.35z"/></svg>
-  WhatsApp
-</a>
+  <section id="preisrechner">
+    <h2>Preisrechner</h2>
+    <form onsubmit="return false;">
+      <label for="startort">Startort:</label>
+      <input type="text" id="startort" placeholder="z.B. Berlin" required />
+      <label for="zielort">Zielort:</label>
+      <input type="text" id="zielort" placeholder="z.B. Hamburg" required />
+      <label for="fahrzeugtyp">Fahrzeugtyp:</label>
+      <select id="fahrzeugtyp" required>
+        <option value="">Bitte wählen</option>
+        <option value="auto">Auto</option>
+        <option value="motorrad">Motorrad</option>
+        <option value="wohnmobil">Wohnmobil</option>
+      </select>
+      <button onclick="preisBerechnen()">Preis berechnen</button>
+    </form>
+    <div id="preisErgebnis"></div>
+  </section>
 
-<footer>
-  &copy; 2025 Fahrzeugüberführung bundesweit. Alle Rechte vorbehalten.
-</footer>
+  <section id="kontakt">
+    <h2>Kontakt</h2>
+    <p>Rufen Sie uns an: <a href="tel:+491728001926">0172 8001926</a></p>
+    <p>Oder schreiben Sie uns eine WhatsApp-Nachricht:</p>
+    <a href="https://wa.me/491728001926" target="_blank" rel="noopener" style="color:#10b981; font-weight:bold;">WhatsApp Chat starten</a>
+  </section>
+
+  <section id="antrag">
+    <h2>Online-Antrag</h2>
+    <form>
+      <label for="name">Name:</label>
+      <input type="text" id="name" required />
+      <label for="email">E-Mail:</label>
+      <input type="email" id="email" required />
+      <label for="fahrzeugdetails">Fahrzeugdetails:</label>
+      <textarea id="fahrzeugdetails" rows="4" required></textarea>
+      <button type="submit">Antrag absenden</button>
+    </form>
+  </section>
+
+  <!-- WhatsApp Floating Button -->
+  <a href="https://wa.me/491728001926" target="_blank" rel="noopener" class="callback-button" aria-label="WhatsApp Kontakt">
+    📱
+  </a>
+
+  <footer>
+    <p>&copy; 2025 Fahrzeugüberführung bundesweit | <a href="#kontakt">Impressum</a></p>
+  </footer>
+
+  <script>
+    // Hintergrund-Slider
+    const slides = document.querySelectorAll('.slide');
+    let currentSlide = 0;
+    setInterval(() => {
+      slides[currentSlide].classList.remove('active');
+      currentSlide = (currentSlide + 1) % slides.length;
+      slides[currentSlide].classList.add('active');
+    }, 5000);
+
+    // Fade-in Sektionen beim Scrollen
+    const sections = document.querySelectorAll('section');
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.1 });
+    sections.forEach(section => observer.observe(section));
+
+    // Preisrechner Funktion (beispielhaft, einfacher fixer Preis)
+    function preisBerechnen() {
+      const start = document.getElementById('startort').value.trim();
+      const ziel = document.getElementById('zielort').value.trim();
+      const typ = document.getElementById('fahrzeugtyp').value;
+      if(!start || !ziel || !typ) {
+        alert('Bitte alle Felder ausfüllen.');
+        return;
+      }
+      let basisPreis = 50; // Basispreis in Euro
+      if(typ === 'motorrad') basisPreis = 30;
+      else if(typ === 'wohnmobil') basisPreis = 80;
+      // Beispiel: je 100km + 20€
+      // Hier müsste man eine echte Distanzberechnung einbauen
+      const preis = basisPreis + 20;
+      document.getElementById('preisErgebnis').textContent = `Geschätzter Preis: ca. ${preis} €`;
+    }
+  </script>
 
 </body>
 </html>
