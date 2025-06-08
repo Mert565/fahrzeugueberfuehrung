@@ -9,6 +9,22 @@
     html {
       scroll-behavior: smooth;
     }
+    <script>
+  let currentSlide = 0;
+  const slides = document.querySelectorAll('.slide');
+
+  function showSlide(index) {
+    slides.forEach((slide, i) => {
+      slide.classList.toggle('active', i === index);
+    });
+  }
+
+  setInterval(() => {
+    currentSlide = (currentSlide + 1) % slides.length;
+    showSlide(currentSlide);
+  }, 5000); // alle 5 Sekunden wechseln
+</script>
+
     body {
       margin: 0;
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -35,12 +51,17 @@
       font-weight: bold;
     }
     .hero {
-      background: url('https://images.unsplash.com/photo-1610911415344-32516c3f12b1?auto=format&fit=crop&w=1600&q=80') no-repeat center center;
-      background-size: cover;
-      padding: 6rem 2rem;
-      color: white;
-      text-align: center;
-      animation: fadeIn 2s ease-in;
+     <div class="hero-slider">
+  <div class="slide active" style="background-image: url('https://images.unsplash.com/photo-1549924231-f129b911e442?auto=format&fit=crop&w=1600&q=80');"></div>
+  <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1597007253328-7d5dfcd655b3?auto=format&fit=crop&w=1600&q=80');"></div>
+  <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1583573637033-10cd2620d302?auto=format&fit=crop&w=1600&q=80');"></div>
+  <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1606149059549-4813e66b1451?auto=format&fit=crop&w=1600&q=80');"></div>
+  <div class="hero-content">
+    <h1>Wir bringen Ihr Fahrzeug sicher ans Ziel</h1>
+    <p>PKW · Sprinter · Leasingfahrzeuge – Deutschlandweit für Sie unterwegs.</p>
+  </div>
+</div>
+
     }
     @keyframes fadeIn {
       from { opacity: 0; transform: translateY(-20px); }
@@ -130,6 +151,46 @@
       }
     }
   </style>
+  .hero-slider {
+  position: relative;
+  height: 500px;
+  overflow: hidden;
+}
+
+.slide {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+  opacity: 0;
+  transition: opacity 1s ease-in-out;
+}
+
+.slide.active {
+  opacity: 1;
+}
+
+.hero-content {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+  text-align: center;
+  text-shadow: 1px 1px 4px rgba(0,0,0,0.8);
+}
+
+.hero-content h1 {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+}
+
+.hero-content p {
+  font-size: 1.25rem;
+}
+
 </head>
 <body>
   <header>
