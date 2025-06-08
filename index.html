@@ -2,15 +2,17 @@
 <html lang="de">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Fahrzeugüberführung bundesweit</title>
-  <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/747/747376.png" type="image/png"/>
+  <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/747/747376.png" type="image/png" />
   <style>
+    /* Grund-Reset & Schrift */
     body {
       margin: 0;
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       background-color: #f9fafb;
       color: #111827;
+      scroll-behavior: smooth;
     }
     header {
       background-color: #1f2937;
@@ -25,96 +27,118 @@
       background-color: #111827;
       padding: 1rem;
       flex-wrap: wrap;
+      position: sticky;
+      top: 0;
+      z-index: 100;
     }
     nav a {
       color: white;
       text-decoration: none;
       font-weight: bold;
+      cursor: pointer;
     }
-
-    .hero-slider {
+    nav a:hover {
+      text-decoration: underline;
+    }
+    /* Hintergrund-Slider */
+    .hero {
       position: relative;
-      height: 500px;
+      height: 400px;
       overflow: hidden;
+      color: white;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 0 1rem;
+      user-select: none;
     }
     .slide {
       position: absolute;
-      top: 0; left: 0;
-      width: 100%;
-      height: 100%;
-      background-size: cover;
+      top: 0; left: 0; right: 0; bottom: 0;
       background-position: center;
+      background-size: cover;
       opacity: 0;
       transition: opacity 1s ease-in-out;
+      z-index: 0;
     }
     .slide.active {
       opacity: 1;
+      z-index: 1;
     }
     .hero-content {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      color: white;
-      text-align: center;
-      text-shadow: 1px 1px 4px rgba(0,0,0,0.8);
-      max-width: 90%;
+      position: relative;
+      z-index: 2;
+      max-width: 900px;
+      background: rgba(0,0,0,0.5);
+      padding: 2rem;
+      border-radius: 8px;
     }
     .hero-content h1 {
       font-size: 3rem;
-      margin-bottom: 1rem;
+      margin: 0 0 0.5rem;
     }
     .hero-content p {
       font-size: 1.25rem;
+      margin: 0;
     }
-
+    /* Sektionen */
     section {
-      max-width: 1000px;
-      margin: 2rem auto;
-      padding: 1rem;
+      max-width: 900px;
+      margin: 3rem auto;
+      padding: 1rem 2rem;
       opacity: 0;
       transform: translateY(20px);
-      transition: all 0.6s ease-out;
+      transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+      background-color: white;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgb(0 0 0 / 0.1);
     }
-
     section.visible {
       opacity: 1;
       transform: translateY(0);
     }
-
     section h2 {
       font-size: 2rem;
       margin-bottom: 1rem;
+      color: #1f2937;
+      border-bottom: 2px solid #10b981;
+      padding-bottom: 0.5rem;
     }
-
     ul {
-      list-style: disc;
-      padding-left: 1.5rem;
+      list-style: disc inside;
+      color: #374151;
     }
-
     form {
       display: flex;
       flex-direction: column;
       gap: 1rem;
     }
-
     input, textarea, select, button {
       padding: 0.75rem;
       font-size: 1rem;
       border: 1px solid #d1d5db;
       border-radius: 0.375rem;
     }
-
     button {
-      background-color: #1f2937;
+      background-color: #10b981;
       color: white;
+      border: none;
       cursor: pointer;
+      font-weight: bold;
       transition: background-color 0.3s ease;
     }
     button:hover {
-      background-color: #2563eb;
+      background-color: #059669;
     }
-
+    /* Preisrechner Ergebnis */
+    #preisErgebnis {
+      font-weight: bold;
+      margin-top: 0.5rem;
+      color: #059669;
+    }
+    /* Callback Button */
     .callback-button {
       position: fixed;
       bottom: 90px;
@@ -129,14 +153,22 @@
       cursor: pointer;
       z-index: 1000;
     }
-
+    /* Footer */
     footer {
       background-color: #f3f4f6;
       text-align: center;
       padding: 2rem 1rem;
       font-size: 0.9rem;
+      color: #6b7280;
     }
-
+    footer a {
+      color: #2563eb;
+      text-decoration: none;
+    }
+    footer a:hover {
+      text-decoration: underline;
+    }
+    /* Cookie Banner */
     .cookie-banner {
       position: fixed;
       bottom: 0;
@@ -149,17 +181,19 @@
       justify-content: space-between;
       align-items: center;
       z-index: 9999;
+      flex-wrap: wrap;
+      gap: 0.5rem;
     }
-
     .cookie-banner button {
       background: white;
       color: #1f2937;
       border: none;
       padding: 0.5rem 1rem;
-      margin-left: 0.5rem;
       cursor: pointer;
+      border-radius: 4px;
+      font-weight: bold;
     }
-
+    /* Responsive */
     @media (max-width: 600px) {
       nav {
         flex-direction: column;
@@ -189,21 +223,20 @@
     <a href="#antrag">Antrag</a>
   </nav>
 
-  <div class="hero-slider">
+  <div class="hero">
     <div class="slide active" style="background-image: url('https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=1600&q=80');"></div>
     <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1549924231-f129b911e442?auto=format&fit=crop&w=1600&q=80');"></div>
-    <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1502877338535-766e1452684a?auto=format&fit=crop&w=1600&q=80');"></div>
-    <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1570129477492-45c003edd2be?auto=format&fit=crop&w=1600&q=80');"></div>
+    <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1549924231-f129b911e442?auto=format&fit=crop&w=1600&q=80');"></div>
     <div class="hero-content">
       <h1>Wir bringen Ihr Fahrzeug sicher ans Ziel</h1>
-      <p>PKW · Sprinter · Leasingfahrzeuge – deutschlandweit für Sie unterwegs</p>
+      <p>Überführungen deutschlandweit – zuverlässig, günstig und schnell.</p>
     </div>
   </div>
 
   <section id="leistungen">
     <h2>Unsere Leistungen</h2>
     <ul>
-      <li>Fahrzeugüberführung für PKW, Transporter, Leasingfahrzeuge</li>
+      <li>Fahrzeugüberführung für Autos & Transporter</li>
       <li>Deutschlandweiter Hol- und Bringservice</li>
       <li>Vollkaskoversicherung inklusive</li>
       <li>Tank-, Reinigungs- & Zulassungsdienste</li>
@@ -212,6 +245,7 @@
 
   <section id="kunden">
     <h2>Für wen?</h2>
+    <p>Unsere Dienstleistung richtet sich an:</p>
     <ul>
       <li>Autohäuser & Kfz-Händler</li>
       <li>Leasinggesellschaften & Flottenmanager</li>
@@ -221,7 +255,7 @@
 
   <section id="preisrechner">
     <h2>Preisrechner</h2>
-    <form id="preisForm" onsubmit="event.preventDefault(); berechnePreis();">
+    <form onsubmit="event.preventDefault(); berechnePreis();">
       <label for="fahrzeugtyp">Fahrzeugtyp:</label>
       <select id="fahrzeugtyp" required>
         <option value="">Bitte wählen</option>
@@ -235,14 +269,140 @@
 
       <button type="submit">Preis berechnen</button>
     </form>
-    <p id="preisErgebnis" style="margin-top:1rem; font-weight: bold;"></p>
+    <p id="preisErgebnis"></p>
   </section>
 
   <section id="kontakt">
     <h2>Kontaktieren Sie uns</h2>
     <form action="https://formspree.io/f/your-form-id" method="POST">
-      <input type="text" name="name" placeholder="Ihr Name" required>
-      <input type="email" name="email" placeholder="Ihre E-Mail-Adresse" required>
-      <input type="tel" name="telefon" placeholder="Telefonnummer">
+      <input type="text" name="name" placeholder="Ihr Name" required />
+      <input type="email" name="email" placeholder="Ihre E-Mail-Adresse" required />
+      <input type="tel" name="telefon" placeholder="Telefonnummer" />
       <textarea name="nachricht" rows="5" placeholder="Ihre Nachricht" required></textarea>
-      <button type="
+      <button type="submit">Anfrage senden</button>
+    </form>
+  </section>
+
+  <section id="antrag">
+    <h2>Antragsformular & PDF-Download</h2>
+    <form id="antragsForm" onsubmit="event.preventDefault(); generierePDF();">
+      <label for="kundeName">Name:</label>
+      <input type="text" id="kundeName" required />
+      <label for="kundeEmail">E-Mail:</label>
+      <input type="email" id="kundeEmail" required />
+      <label for="fahrzeug">Fahrzeugtyp:</label>
+      <select id="fahrzeug" required>
+        <option value="">Bitte wählen</option>
+        <option value="pkw">PKW</option>
+        <option value="sprinter">Sprinter</option>
+        <option value="leasing">Leasingfahrzeug</option>
+      </select>
+      <label for="zielort">Zielort:</label>
+      <input type="text" id="zielort" required />
+      <button type="submit">PDF Antrag herunterladen</button>
+    </form>
+  </section>
+
+  <div class="callback-button" title="Rückruf anfordern" onclick="alert('Wir rufen Sie schnellstmöglich zurück!');">
+    📞
+  </div>
+
+  <footer>
+    <p>&copy; 2025 Fahrzeugüberführung. Alle Rechte vorbehalten.</p>
+    <p><a href="#impressum">Impressum</a> | <a href="#datenschutz">Datenschutz</a></p>
+  </footer>
+
+  <div class="cookie-banner" id="cookieBanner">
+    <span>Wir verwenden Cookies, um Ihnen die beste Erfahrung zu bieten.</span>
+    <button onclick="akzeptiereCookies()">OK</button>
+  </div>
+
+  <script>
+    // Scroll Animation sichtbar machen
+    function checkSections() {
+      const sections = document.querySelectorAll('section');
+      const triggerBottom = window.innerHeight * 0.85;
+      sections.forEach(section => {
+        const top = section.getBoundingClientRect().top;
+        if (top < triggerBottom) {
+          section.classList.add('visible');
+        }
+      });
+    }
+    window.addEventListener('scroll', checkSections);
+    window.addEventListener('load', checkSections);
+
+    // Hintergrund-Slider
+    let currentSlide = 0;
+    const slides = document.querySelectorAll('.slide');
+    function nextSlide() {
+      slides[currentSlide].classList.remove('active');
+      currentSlide = (currentSlide + 1) % slides.length;
+      slides[currentSlide].classList.add('active');
+    }
+    setInterval(nextSlide, 5000);
+
+    // Preisrechner-Funktion
+    function berechnePreis() {
+      const typ = document.getElementById('fahrzeugtyp').value;
+      const km = Number(document.getElementById('entfernung').value);
+      if (!typ || km <= 0) {
+        alert('Bitte Fahrzeugtyp und Entfernung korrekt eingeben.');
+        return;
+      }
+      let basisPreis = 0;
+      if (typ === 'pkw') basisPreis = 0.70;
+      else if (typ === 'sprinter') basisPreis = 1.00;
+      else if (typ === 'leasing') basisPreis = 0.85;
+      const preis = (basisPreis * km).toFixed(2);
+      document.getElementById('preisErgebnis').textContent = `Geschätzter Preis: ${preis} €`;
+    }
+
+    // PDF-Antrag mit jsPDF generieren (minimal)
+    async function generierePDF() {
+      if (!window.jspdf) {
+        const script = document.createElement('script');
+        script.src = "https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js";
+        script.onload = () => { generierePDF(); };
+        document.head.appendChild(script);
+        return;
+      }
+      const { jsPDF } = window.jspdf;
+      const doc = new jsPDF();
+
+      const name = document.getElementById('kundeName').value.trim();
+      const email = document.getElementById('kundeEmail').value.trim();
+      const fahrzeug = document.getElementById('fahrzeug').value;
+      const zielort = document.getElementById('zielort').value.trim();
+
+      if (!name || !email || !fahrzeug || !zielort) {
+        alert('Bitte alle Felder ausfüllen!');
+        return;
+      }
+
+      doc.setFontSize(16);
+      doc.text("Antragsformular Fahrzeugüberführung", 20, 20);
+      doc.setFontSize(12);
+      doc.text(`Name: ${name}`, 20, 40);
+      doc.text(`E-Mail: ${email}`, 20, 50);
+      doc.text(`Fahrzeugtyp: ${fahrzeug}`, 20, 60);
+      doc.text(`Zielort: ${zielort}`, 20, 70);
+      doc.text("Vielen Dank für Ihre Anfrage!", 20, 90);
+
+      doc.save("Antrag_Fahrzeugueberfuehrung.pdf");
+    }
+
+    // Cookie Banner
+    function akzeptiereCookies() {
+      localStorage.setItem('cookiesAkzeptiert', 'true');
+      document.getElementById('cookieBanner').style.display = 'none';
+    }
+    window.addEventListener('load', () => {
+      if(localStorage.getItem('cookiesAkzeptiert') === 'true'){
+        document.getElementById('cookieBanner').style.display = 'none';
+      }
+    });
+  </script>
+
+</body>
+</html>
