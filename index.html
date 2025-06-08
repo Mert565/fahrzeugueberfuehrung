@@ -297,8 +297,8 @@
               placeholder: 'z.B. 150',
               required: true
             }),
-            React.createElement('button', { type: 'submit', disabled: preis === null }, 'Preis berechnen'),
-            preis !== null && React.createElement('p', { style: { marginTop: '1rem', fontWeight: 'bold' } }, `Geschätzter Preis: ${preis} €`)
+            React.createElement('button', { type: 'submit', disabled: true }, 'Preis berechnen'),
+            preis !== null && React.createElement('p', { style: { marginTop: '1rem', fontWeight: 'bold' } }, `Preis: ${preis} €`)
           )
         ),
         React.createElement(Section, { id: 'kontakt', title: 'Kontakt' },
