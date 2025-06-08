@@ -58,6 +58,7 @@
       color: white;
       text-align: center;
       text-shadow: 1px 1px 4px rgba(0,0,0,0.8);
+      max-width: 90%;
     }
     .hero-content h1 {
       font-size: 3rem;
@@ -97,7 +98,7 @@
       gap: 1rem;
     }
 
-    input, textarea, button {
+    input, textarea, select, button {
       padding: 0.75rem;
       font-size: 1rem;
       border: 1px solid #d1d5db;
@@ -108,6 +109,10 @@
       background-color: #1f2937;
       color: white;
       cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+    button:hover {
+      background-color: #2563eb;
     }
 
     .callback-button {
@@ -179,14 +184,16 @@
   <nav>
     <a href="#leistungen">Leistungen</a>
     <a href="#kunden">Zielgruppen</a>
+    <a href="#preisrechner">Preisrechner</a>
     <a href="#kontakt">Kontakt</a>
+    <a href="#antrag">Antrag</a>
   </nav>
 
   <div class="hero-slider">
-    <div class="slide active" style="background-image: url('https://images.unsplash.com/photo-1549924231-f129b911e442?auto=format&fit=crop&w=1600&q=80');"></div>
-    <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1597007253328-7d5dfcd655b3?auto=format&fit=crop&w=1600&q=80');"></div>
-    <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1583573637033-10cd2620d302?auto=format&fit=crop&w=1600&q=80');"></div>
-    <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1606149059549-4813e66b1451?auto=format&fit=crop&w=1600&q=80');"></div>
+    <div class="slide active" style="background-image: url('https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=1600&q=80');"></div>
+    <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1549924231-f129b911e442?auto=format&fit=crop&w=1600&q=80');"></div>
+    <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1502877338535-766e1452684a?auto=format&fit=crop&w=1600&q=80');"></div>
+    <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1570129477492-45c003edd2be?auto=format&fit=crop&w=1600&q=80');"></div>
     <div class="hero-content">
       <h1>Wir bringen Ihr Fahrzeug sicher ans Ziel</h1>
       <p>PKW · Sprinter · Leasingfahrzeuge – deutschlandweit für Sie unterwegs</p>
@@ -212,6 +219,25 @@
     </ul>
   </section>
 
+  <section id="preisrechner">
+    <h2>Preisrechner</h2>
+    <form id="preisForm" onsubmit="event.preventDefault(); berechnePreis();">
+      <label for="fahrzeugtyp">Fahrzeugtyp:</label>
+      <select id="fahrzeugtyp" required>
+        <option value="">Bitte wählen</option>
+        <option value="pkw">PKW</option>
+        <option value="sprinter">Sprinter</option>
+        <option value="leasing">Leasingfahrzeug</option>
+      </select>
+
+      <label for="entfernung">Entfernung (in km):</label>
+      <input type="number" id="entfernung" min="1" max="2000" required />
+
+      <button type="submit">Preis berechnen</button>
+    </form>
+    <p id="preisErgebnis" style="margin-top:1rem; font-weight: bold;"></p>
+  </section>
+
   <section id="kontakt">
     <h2>Kontaktieren Sie uns</h2>
     <form action="https://formspree.io/f/your-form-id" method="POST">
@@ -219,53 +245,4 @@
       <input type="email" name="email" placeholder="Ihre E-Mail-Adresse" required>
       <input type="tel" name="telefon" placeholder="Telefonnummer">
       <textarea name="nachricht" rows="5" placeholder="Ihre Nachricht" required></textarea>
-      <button type="submit">Anfrage senden</button>
-    </form>
-  </section>
-
-  <div class="callback-button" onclick="alert('Wir rufen Sie gerne zurück! 📞')">
-    📞
-  </div>
-
-  <footer>
-    &copy; 2025 Fahrzeugüberführung | <a href="#">Impressum</a> | <a href="#">Datenschutz</a>
-  </footer>
-
-  <div class="cookie-banner" id="cookieBanner">
-    <span>Diese Website verwendet Cookies, um Ihnen die bestmögliche Funktionalität zu bieten.</span>
-    <div>
-      <button onclick="document.getElementById('cookieBanner').style.display='none'">Nur notwendige</button>
-      <button onclick="document.getElementById('cookieBanner').style.display='none'">Alle akzeptieren</button>
-    </div>
-  </div>
-
-  <script>
-    let currentSlide = 0;
-    const slides = document.querySelectorAll('.slide');
-
-    function showSlide(index) {
-      slides.forEach((slide, i) => {
-        slide.classList.toggle('active', i === index);
-      });
-    }
-
-    setInterval(() => {
-      currentSlide = (currentSlide + 1) % slides.length;
-      showSlide(currentSlide);
-    }, 5000);
-
-    // Scroll Animation
-    const sections = document.querySelectorAll("section");
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add("visible");
-        }
-      });
-    }, { threshold: 0.1 });
-
-    sections.forEach(section => observer.observe(section));
-  </script>
-
-</body>
-</html>
+      <button type="
