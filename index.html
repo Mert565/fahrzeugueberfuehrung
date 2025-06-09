@@ -1,88 +1,204 @@
 <!DOCTYPE html>
 <html lang="de">
+
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Fahrzeugüberführung</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fahrzeugüberführung 24/7</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;500;700&display=swap" rel="stylesheet">
   <style>
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
+      font-family: 'Inter', sans-serif;
     }
 
-    body, html {
-      height: 100%;
-      font-family: Arial, sans-serif;
-    }
-
-    .hero {
-      position: relative;
-      height: 100vh;
-      overflow: hidden;
-    }
-
-    .slide {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
+    body {
+      background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1607774586180-0e57d60fc25f?auto=format&fit=crop&w=1950&q=80');
       background-size: cover;
       background-position: center;
-      opacity: 0;
-      transition: opacity 1.5s ease-in-out;
-      z-index: 0;
-    }
-
-    .slide.active {
-      opacity: 1;
-      z-index: 1;
-    }
-
-    .hero-content {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
       color: #fff;
-      text-align: center;
-      z-index: 2;
-      background: rgba(0,0,0,0.5);
-      padding: 2rem;
-      border-radius: 10px;
+      line-height: 1.6;
     }
 
-    h1 {
+    header {
+      text-align: center;
+      padding: 4rem 2rem;
+      background: rgba(0, 0, 0, 0.5);
+    }
+
+    header h1 {
       font-size: 3rem;
       margin-bottom: 1rem;
     }
 
-    p {
-      font-size: 1.5rem;
+    section {
+      padding: 4rem 2rem;
+      max-width: 1000px;
+      margin: auto;
+      animation: fadeInUp 1s ease;
+    }
+
+    @keyframes fadeInUp {
+      0% {
+        opacity: 0;
+        transform: translateY(40px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    h2 {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+      color: #ffd700;
+    }
+
+    .leistungen, .zielgruppe {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 2rem;
+    }
+
+    .card {
+      background: rgba(255, 255, 255, 0.1);
+      padding: 1.5rem;
+      border-radius: 12px;
+      transition: transform 0.3s ease;
+    }
+
+    .card:hover {
+      transform: scale(1.05);
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    input, textarea, select {
+      padding: 0.75rem;
+      border-radius: 8px;
+      border: none;
+    }
+
+    button {
+      padding: 0.75rem;
+      background: #ffd700;
+      border: none;
+      color: #000;
+      font-weight: bold;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    button:hover {
+      background: #e6c200;
+    }
+
+    .whatsapp {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background-color: #25D366;
+      color: white;
+      border-radius: 50%;
+      width: 60px;
+      height: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 0 10px rgba(0,0,0,0.3);
+      z-index: 999;
+    }
+
+    .whatsapp i {
+      font-size: 28px;
     }
   </style>
 </head>
+
 <body>
-  <div class="hero">
-    <div class="slide active" style="background-image: url('https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=1600&q=80');"></div>
-    <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1582095133179-cd69c9f1b5f8?auto=format&fit=crop&w=1600&q=80');"></div>
-    <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1616676522073-1a4b0161f7a2?auto=format&fit=crop&w=1600&q=80');"></div>
-    <div class="hero-content">
-      <h1>Fahrzeugüberführung in ganz Deutschland</h1>
-      <p>Schnell. Sicher. Professionell.</p>
+  <header>
+    <h1>Fahrzeugüberführung 24/7</h1>
+    <p>Zuverlässig – Flexibel – Bundesweit</p>
+  </header>
+
+  <section>
+    <h2>Unsere Leistungen</h2>
+    <div class="leistungen">
+      <div class="card">✅ Überführung von Autos, Transportern & Wohnmobilen</div>
+      <div class="card">✅ Pünktliche & sichere Auslieferung</div>
+      <div class="card">✅ Qualifizierte, gepflegte Fahrer</div>
+      <div class="card">✅ Express-Service & Nachteinsätze</div>
     </div>
-  </div>
+  </section>
+
+  <section>
+    <h2>Für wen wir arbeiten</h2>
+    <div class="zielgruppe">
+      <div class="card">🚗 Autohäuser & Werkstätten</div>
+      <div class="card">🏢 Flottenbetreiber & Leasingfirmen</div>
+      <div class="card">👤 Privatpersonen</div>
+      <div class="card">📦 Auto-Abos & Lieferdienste</div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Preisrechner</h2>
+    <form onsubmit="event.preventDefault(); berechnePreis();">
+      <input type="text" id="start" placeholder="Startort" required>
+      <input type="text" id="ziel" placeholder="Zielort" required>
+      <input type="number" id="km" placeholder="Entfernung in km" required>
+      <button type="submit">Preis berechnen</button>
+    </form>
+    <p id="preis"></p>
+  </section>
+
+  <section>
+    <h2>Kontakt</h2>
+    <form>
+      <input type="text" placeholder="Ihr Name" required>
+      <input type="email" placeholder="E-Mail" required>
+      <textarea rows="4" placeholder="Nachricht" required></textarea>
+      <button type="submit">Absenden</button>
+    </form>
+  </section>
+
+  <section>
+    <h2>Online Antrag</h2>
+    <form>
+      <input type="text" placeholder="Fahrzeugtyp" required>
+      <input type="date" required>
+      <input type="text" placeholder="Abholadresse" required>
+      <input type="text" placeholder="Zieladresse" required>
+      <button type="submit">Antrag senden</button>
+    </form>
+  </section>
+
+  <a href="https://wa.me/491728001926" class="whatsapp" target="_blank">
+    <i class="fab fa-whatsapp"></i>
+  </a>
 
   <script>
-    const slides = document.querySelectorAll(".slide");
-    let currentSlide = 0;
-
-    setInterval(() => {
-      slides[currentSlide].classList.remove("active");
-      currentSlide = (currentSlide + 1) % slides.length;
-      slides[currentSlide].classList.add("active");
-    }, 5000);
+    function berechnePreis() {
+      const km = parseFloat(document.getElementById("km").value);
+      if (isNaN(km) || km <= 0) {
+        document.getElementById("preis").textContent = "Bitte gültige Kilometeranzahl eingeben.";
+        return;
+      }
+      const grundpreis = 49;
+      const preisProKm = 0.85;
+      const gesamt = grundpreis + km * preisProKm;
+      document.getElementById("preis").textContent = `Gesamtpreis: ${gesamt.toFixed(2)} €`;
+    }
   </script>
 </body>
+
 </html>
