@@ -3,134 +3,86 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Fahrzeugüberführung Europaweit</title>
-  <link rel="stylesheet" href="styles.css" />
+  <title>Fahrzeugüberführung</title>
   <style>
-    body {
+    * {
       margin: 0;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background-color: #f9fafb;
-      color: #1f2937;
+      padding: 0;
+      box-sizing: border-box;
     }
+
+    body, html {
+      height: 100%;
+      font-family: Arial, sans-serif;
+    }
+
     .hero {
       position: relative;
-      height: 90vh;
+      height: 100vh;
       overflow: hidden;
     }
+
     .slide {
       position: absolute;
-      top: 0; left: 0; width: 100%; height: 100%;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
       background-size: cover;
       background-position: center;
       opacity: 0;
-      transition: opacity 1s ease-in-out;
+      transition: opacity 1.5s ease-in-out;
+      z-index: 0;
     }
-    .slide.active { opacity: 1; }
-    .overlay {
-      position: absolute;
-      top: 0; left: 0; width: 100%; height: 100%;
-      background: rgba(0, 0, 0, 0.5);
+
+    .slide.active {
+      opacity: 1;
       z-index: 1;
     }
+
     .hero-content {
       position: absolute;
-      z-index: 2;
-      top: 50%; left: 50%; transform: translate(-50%, -50%);
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      color: #fff;
       text-align: center;
-      color: white;
-      padding: 1rem;
+      z-index: 2;
+      background: rgba(0,0,0,0.5);
+      padding: 2rem;
+      border-radius: 10px;
     }
-    .cta-button {
-      background: #059669;
-      color: white;
-      padding: 0.75rem 1.5rem;
-      border: none;
-      border-radius: 8px;
-      font-size: 1rem;
-      font-weight: bold;
-      cursor: pointer;
-      text-decoration: none;
+
+    h1 {
+      font-size: 3rem;
+      margin-bottom: 1rem;
     }
-    .cta-button:hover { background: #047857; }
-    .section {
-      padding: 3rem 1rem;
-      max-width: 1100px;
-      margin: auto;
+
+    p {
+      font-size: 1.5rem;
     }
-    .grid { display: grid; gap: 2rem; }
-    .features {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 2rem;
-    }
-    .feature {
-      background: white;
-      border-radius: 12px;
-      padding: 1.5rem;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-      transition: transform 0.3s;
-    }
-    .feature:hover { transform: translateY(-5px); }
   </style>
 </head>
 <body>
-  <header class="hero">
-    <div class="slide active" style="background-image: url('autos/slide1.jpg');"></div>
-    <div class="slide" style="background-image: url('autos/slide2.jpg');"></div>
-    <div class="slide" style="background-image: url('autos/slide3.jpg');"></div>
-    <div class="overlay"></div>
+  <div class="hero">
+    <div class="slide active" style="background-image: url('https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=1600&q=80');"></div>
+    <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1582095133179-cd69c9f1b5f8?auto=format&fit=crop&w=1600&q=80');"></div>
+    <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1616676522073-1a4b0161f7a2?auto=format&fit=crop&w=1600&q=80');"></div>
     <div class="hero-content">
-      <h1>Europaweite Fahrzeugüberführungen</h1>
-      <p>Qualifizierte Fahrer | Gepflegtes Auftreten | Pünktlich & Zuverlässig | 24/7 erreichbar</p>
-      <a href="#kontakt" class="cta-button">Jetzt Kontakt aufnehmen</a>
+      <h1>Fahrzeugüberführung in ganz Deutschland</h1>
+      <p>Schnell. Sicher. Professionell.</p>
     </div>
-  </header>
-
-  <main>
-    <section class="section">
-      <h2 style="text-align:center;">Unsere Leistungen</h2>
-      <div class="features">
-        <div class="feature">✔ PKW-, Sprinter- & LKW-Überführungen</div>
-        <div class="feature">✔ Transport per Fahrer oder Trailer</div>
-        <div class="feature">✔ Schnelle Abwicklung & flexible Termine</div>
-      </div>
-    </section>
-
-    <section class="section">
-      <h2 style="text-align:center;">Für wen wir fahren</h2>
-      <div class="features">
-        <div class="feature">✔ Privatpersonen & Firmenkunden</div>
-        <div class="feature">✔ Leasinggesellschaften & Autohäuser</div>
-        <div class="feature">✔ Behörden & Flottenkunden</div>
-      </div>
-    </section>
-
-    <section class="section" id="preisrechner">
-      <h2 style="text-align:center;">Preisrechner</h2>
-      <p style="text-align:center;">Berechnen Sie jetzt schnell & unverbindlich Ihre Überführungskosten.</p>
-      <div style="text-align:center; margin-top:1rem;">
-        <a href="#kontakt" class="cta-button">Jetzt berechnen</a>
-      </div>
-    </section>
-
-    <section class="section" id="kontakt">
-      <h2 style="text-align:center;">Kontakt</h2>
-      <p style="text-align:center;">Rufen Sie uns an unter <strong>0172 8001926</strong> oder schreiben Sie uns via WhatsApp.</p>
-      <div style="text-align:center; margin-top:1rem;">
-        <a href="https://wa.me/491728001926" class="cta-button">WhatsApp Chat starten</a>
-      </div>
-    </section>
-  </main>
+  </div>
 
   <script>
-    let slideIndex = 0;
-    const slides = document.querySelectorAll('.slide');
-    function showSlides() {
-      slides.forEach((s, i) => s.classList.remove('active'));
-      slideIndex = (slideIndex + 1) % slides.length;
-      slides[slideIndex].classList.add('active');
-    }
-    setInterval(showSlides, 4000);
+    const slides = document.querySelectorAll(".slide");
+    let currentSlide = 0;
+
+    setInterval(() => {
+      slides[currentSlide].classList.remove("active");
+      currentSlide = (currentSlide + 1) % slides.length;
+      slides[currentSlide].classList.add("active");
+    }, 5000);
   </script>
 </body>
 </html>
